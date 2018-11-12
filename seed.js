@@ -1,13 +1,27 @@
-const db = require('./models');
+const { db, Gardener, Plot, Vegetable } = require('./models');
 
 db.sync({force: true})
   .then(() => {
     console.log("Success!");
+    db.close();
   })
   .catch(err => {
     console.log('Error...:', err);
     db.close();
   });
+
+Vegetable.create({
+  name: "carrot",
+  color: "orange",
+  plantedOn: new Date()
+});
+
+const PlotVegetable = db.model('plot_vegetable');
+
+return PlotVegetable.create({
+  vegetableId: carrot.id,
+  plotId: plot1.id
+});
 
 // db.sync({force: true})
 // .then(() => {
